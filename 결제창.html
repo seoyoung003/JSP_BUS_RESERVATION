@@ -1,0 +1,369 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>좌석 선택 및 결제 시스템</title>
+    <link href="https://fonts.googleapis.com/css?family=Poppins:200,300,400,500,600,700,800,900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo", "Poppins", sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            flex-direction: column;
+        }
+
+        .box {
+            position: relative;
+            width: 500px;
+            background: #1c1c1c;
+            border-radius: 8px;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            flex-direction: column;
+            padding: 20px;
+        }
+
+        .guide {
+            width: 100%;
+            background: #28292d;
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 30px;
+        }
+
+            .guide h2 {
+                color: #fff;
+                font-weight: 800;
+                text-align: center;
+                letter-spacing: 0.2em;
+            }
+
+        .guide-hr {
+            margin-top: 15px;
+            border: 1px solid #696969;
+            width: 100%;
+        }
+
+        .guide-manual {
+            margin-top: 20px;
+            width: 100%;
+            background-color: antiquewhite;
+            border: 3px solid #9b8342;
+            border-radius: 10px;
+            box-shadow: 1px 1px 18px #bfbf99;
+            padding: 20px;
+        }
+
+        .seat-choice-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 10px;
+            margin-bottom: 20px;
+            margin-top: 20px;
+        }
+
+        /* 좌석 기본 상태 (예약 가능) */
+        .seat {
+            width: 50px;
+            height: 50px;
+            background-image: url('/mnt/data/seat_images/좌석 이미지/예약되지 않은 좌석(선택가능 좌석).png');
+            background-size: cover;
+            border-radius: 5px;
+            cursor: pointer;
+            border: 2px solid #555;
+        }
+
+            /* 선택된 좌석 */
+            .seat.selected {
+                background-image: url('/mnt/data/seat_images/좌석 이미지/선택한 좌석.png');
+                border-color: #57fb0a;
+                box-shadow: 0 0 5px #57fb0a;
+            }
+
+            /* 예약된 좌석 (선택 불가) */
+            .seat.unavailable {
+                background-image: url('/mnt/data/seat_images/좌석 이미지/예약된 좌석.png');
+                cursor: not-allowed;
+            }
+
+        #payment-form {
+            margin-top: 15px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+
+            #payment-form label {
+                color: #333;
+                font-size: 1em;
+            }
+
+            #payment-form input {
+                padding: 10px;
+                font-size: 1.1em;
+                border: 2px solid #555;
+                border-radius: 5px;
+                background: #f5f5f5;
+            }
+
+                #payment-form input:focus {
+                    border-color: #57fb0a;
+                    box-shadow: 0 0 5px #57fb0a;
+                    outline: none;
+                }
+
+            #payment-form button {
+                background-color: #2b55ff;
+                color: #fff;
+                padding: 12px;
+                border: none;
+                border-radius: 5px;
+                cursor: pointer;
+                font-size: 1.2em;
+                font-weight: 700;
+            }
+
+                #payment-form button:hover {
+                    background-color: #233fac;
+                }
+
+        .next-button {
+            background-color: #57fb0a;
+            color: #fff;
+            padding: 12px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+
+        footer {
+            padding-top: 32px;
+            padding-bottom: 32px;
+            text-align: center;
+            color: #000;
+            background-color: #f1f1f1;
+            width: 100%;
+            position: fixed;
+            bottom: 0;
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="box">
+        <!-- 좌석 선택 화면 -->
+        <div id="seat-selection" class="guide">
+            <h2>좌석 선택</h2>
+            <hr class="guide-hr">
+
+            <!-- 좌석 선택 그리드 -->
+            <div class="seat-choice-grid">
+                <div class="seat" data-seat="1"></div>
+                <div class="seat unavailable" data-seat="2"></div>
+                <div></div>
+                <div class="seat" data-seat="3"></div>
+                <div class="seat" data-seat="4"></div>
+
+                <div class="seat" data-seat="5"></div>
+                <div class="seat" data-seat="6"></div>
+                <div></div>
+                <div class="seat" data-seat="7"></div>
+                <div class="seat" data-seat="8"></div>
+
+                <div class="seat" data-seat="10"></div>
+                <div class="seat" data-seat="11"></div>
+                <div></div>
+                <div class="seat" data-seat="12"></div>
+                <div class="seat unavailable" data-seat="13"></div>
+
+                <div class="seat" data-seat="13"></div>
+                <div class="seat" data-seat="14"></div>
+                <div></div>
+                <div class="seat" data-seat="15"></div>
+                <div class="seat" data-seat="16"></div>
+
+                <div class="seat" data-seat="17"></div>
+                <div class="seat" data-seat="18"></div>
+                <div></div>
+                <div class="seat" data-seat="19"></div>
+                <div class="seat" data-seat="20"></div>
+
+                <div class="seat" data-seat="21"></div>
+                <div class="seat" data-seat="22"></div>
+                <div></div>
+                <div class="seat" data-seat="23"></div>
+                <div class="seat" data-seat="24"></div>
+
+                <div class="seat" data-seat="25"></div>
+                <div class="seat" data-seat="26"></div>
+                <div></div>
+                <div class="seat" data-seat="27"></div>
+                <div class="seat" data-seat="28"></div>
+
+                <div class="seat" data-seat="29"></div>
+                <div class="seat" data-seat="30"></div>
+                <div></div>
+                <div class="seat" data-seat="31"></div>
+                <div class="seat" data-seat="32"></div>
+
+                <div class="seat" data-seat="33"></div>
+                <div class="seat" data-seat="34"></div>
+                <div></div>
+                <div class="seat" data-seat="35"></div>
+                <div class="seat" data-seat="36"></div>
+
+                <div class="seat" data-seat="37"></div>
+                <div class="seat" data-seat="38"></div>
+                <div></div>
+                <div class="seat" data-seat="39"></div>
+                <div class="seat" data-seat="40"></div>
+
+                <div class="seat" data-seat="41"></div>
+                <div class="seat" data-seat="42"></div>
+                <div class="seat" data-seat="43"></div>
+                <div class="seat" data-seat="44"></div>
+                <div class="seat" data-seat="45"></div>
+            </div>
+
+            <button id="next-button" class="next-button">다음</button>
+        </div>
+
+        <!-- 결제 정보 입력 화면 -->
+        <div id="payment-section" class="guide hidden">
+            <h2>결제 정보 입력</h2>
+            <hr class="guide-hr">
+
+            <div class="guide-manual">
+                <span>결제 정보</span>
+                <form id="payment-form">
+                    <label for="selected-seat">선택한 좌석</label>
+                    <input type="text" id="selected-seat" name="selected-seat" readonly>
+
+                    <label for="card-number">카드 번호</label>
+                    <input type="text" id="card-number" name="card-number" placeholder="1234 5678 9123 4567" required>
+
+                    <label for="expiry-date">유효 기간</label>
+                    <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" required>
+
+                    <label for="cvv">CVV</label>
+                    <input type="text" id="cvv" name="cvv" placeholder="123" required>
+
+                    <label for="amount">결제 금액</label>
+                    <input type="text" id="amount" name="amount" placeholder="₩10000" required>
+
+                    <button type="submit">결제하기</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        &copy; 2024 좌석 선택 및 결제 시스템. 모든 권리 보유.
+    </footer>
+
+    <script>
+    const seats = document.querySelectorAll('.seat:not(.unavailable)');
+    let selectedSeat = null;
+
+    // 좌석 선택 기능
+    seats.forEach(seat => {
+      seat.addEventListener('click', () => {
+        // 이전 선택 좌석 해제
+        if (selectedSeat) {
+          selectedSeat.classList.remove('selected');
+        }
+
+        // 선택된 좌석 표시
+        seat.classList.add('selected');
+        selectedSeat = seat;
+
+        console.log(`선택된 좌석: ${seat.dataset.seat}`);
+      });
+    });
+
+    const nextButton = document.getElementById('next-button');
+    const seatSelectionSection = document.getElementById('seat-selection');
+    const paymentSection = document.getElementById('payment-section');
+    const selectedSeatInput = document.getElementById('selected-seat');
+
+    // "다음" 버튼 클릭 시 결제 화면으로 이동
+    nextButton.addEventListener('click', () => {
+      if (!selectedSeat) {
+        alert("좌석을 선택해 주세요.");
+        return;
+      }
+
+      // 선택된 좌석을 결제 화면에 표시
+      selectedSeatInput.value = selectedSeat.dataset.seat;
+
+      // 좌석 선택 화면 숨기고 결제 화면 표시
+      seatSelectionSection.classList.add('hidden');
+      paymentSection.classList.remove('hidden');
+    });
+
+    const paymentForm = document.getElementById("payment-form");
+
+    // 결제 처리
+    paymentForm.addEventListener("submit", function(event) {
+      event.preventDefault();
+
+      const cardNumber = document.getElementById("card-number").value;
+      const expiryDate = document.getElementById("expiry-date").value;
+      const cvv = document.getElementById("cvv").value;
+      const amount = document.getElementById("amount").value;
+
+      const paymentData = {
+        cardNumber,
+        expiryDate,
+        cvv,
+        amount,
+        seat: selectedSeat.dataset.seat
+      };
+
+      console.log(paymentData); // 여기서 실제 결제 API로 데이터를 전송합니다.
+
+      fetch("https://example.com/payment", { // 결제 API 주소는 실제 결제 서비스에 맞게 변경
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(paymentData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        if (data.success) {
+          alert("결제가 성공적으로 처리되었습니다!");
+        } else {
+          alert("결제 실패. 다시 시도해 주세요.");
+        }
+      })
+      .catch(error => {
+        console.error("결제 에러:", error);
+        alert("결제 처리 중 문제가 발생했습니다.");
+      });
+    });
+    </script>
+</body>
+</html>
