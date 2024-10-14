@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login & Registration</title>
+  <link rel="stylesheet" type="text/css" th:href="@{/css/Login_Registration.css}" />
+</head>
+<body>
+<div class="container">
+  <div class="box signin">
+    <h2>이미 계정이 있습니까?</h2>
+    <button class="signinBtn">로그인</button>
+  </div>
+  <div class="box signup">
+    <h2>등록된 계정이 없습니까?</h2>
+    <button class="signupBtn">회원가입</button>
+  </div>
+  <div class="formBx">
+    <!-- 로그인 폼 -->
+    <div class="form signinform">
+      <form th:action="@{/login}" method="post">
+        <!-- CSRF 토큰 (Spring Security 사용 시 필요) -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <h3>로그인</h3>
+        <input type="text" name="username" placeholder="아이디를 입력해 주세요" th:value="${loginForm.username}" />
+        <input type="password" name="password" placeholder="비밀번호를 입력해 주세요" />
+        <input type="submit" value="로그인" />
+        <div class="find">
+          <a href="#" class="forgot">아이디 찾기</a>
+          <a href="#" class="forgot">비밀번호 찾기</a>
+        </div>
+        <!-- 로그인 에러 메시지 -->
+        <div th:if="${loginError}" class="error">
+          <p th:text="${loginError}"></p>
+        </div>
+      </form>
+    </div>
+    <!-- 회원가입 폼 -->
+    <div class="form signupform">
+      <form th:action="@{/register}" method="post">
+        <!-- CSRF 토큰 (Spring Security 사용 시 필요) -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}" />
+        <h3>회원가입</h3>
+        <input type="text" name="name" placeholder="이름을 입력해 주세요" th:value="${registerForm.name}" />
+        <input type="text" name="phone" placeholder="전화번호를 입력해 주세요" th:value="${registerForm.phone}" />
+        <input type="text" name="username" placeholder="아이디를 입력해 주세요" th:value="${registerForm.username}" />
+        <input type="email" name="email" placeholder="이메일 주소를 입력해 주세요" th:value="${registerForm.email}" />
+        <input type="password" name="password" placeholder="비밀번호를 입력해 주세요" />
+        <input type="password" name="confirmPassword" placeholder="비밀번호를 재입력해 주세요" />
+        <input type="submit" value="회원가입" />
+        <!-- 회원가입 에러 메시지 -->
+        <div th:if="${registerError}" class="error">
+          <p th:text="${registerError}"></p>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<script th:inline="javascript">
+  /*<![CDATA[*/
+  const signinBtn = document.querySelector(".signinBtn");
+  const signupBtn = document.querySelector(".signupBtn");
+  const body = document.querySelector("body");
+
+  signupBtn.onclick = function () {
+    body.classList.add("slide");
+  };
+  signinBtn.onclick = function () {
+    body.classList.remove("slide");
+  };
+  /*]]>*/
+</script>
+</body>
+</html>
