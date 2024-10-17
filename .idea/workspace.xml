@@ -5,10 +5,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80710102-e6dc-4908-9459-009380a964f8" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/resources/static/Login&amp;Registration.css" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/resources/templates/Login&amp;Registration.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/gradle.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/gradle.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/DTO/LoginForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/DTO/RegisterForm.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/service/UserService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bus_reservation/src/main/resources/templates/Login_Registration.html" beforeDir="false" afterPath="$PROJECT_DIR$/bus_reservation/src/main/resources/templates/Login_Registration.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -37,8 +41,19 @@
       </state>
     </system>
   </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+        <option value="HTML File" />
+      </list>
+    </option>
+  </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="file://$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/controller/UserController.java" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
@@ -96,7 +111,8 @@
       <updated>1728569757157</updated>
       <workItem from="1728569759375" duration="904000" />
       <workItem from="1728913494627" duration="2406000" />
-      <workItem from="1728916188037" duration="429000" />
+      <workItem from="1728916188037" duration="848000" />
+      <workItem from="1729145207969" duration="5655000" />
     </task>
     <servers />
   </component>
