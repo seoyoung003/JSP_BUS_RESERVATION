@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<html lang="ko">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login & Registration</title>
-  <link rel="stylesheet" type="text/css" th:href="@{/css/Login_Registration.css}" />
+  <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/css/Login_Registration.css" />
 </head>
 <body>
 <div class="container">
@@ -19,42 +19,45 @@
   <div class="formBx">
     <!-- 로그인 폼 -->
     <div class="form signinform">
-      <form th:action="@{/login}" method="post" th:object="${loginForm}">
+      <form action="${pageContext.request.contextPath}/login" method="post">
         <h3>로그인</h3>
-        <input type="text" th:field="*{username}" placeholder="아이디를 입력해 주세요" />
-        <input type="password" th:field="*{password}" placeholder="비밀번호를 입력해 주세요" />
+        <input type="text" name="username" placeholder="아이디를 입력해 주세요" />
+        <input type="password" name="password" placeholder="비밀번호를 입력해 주세요" />
         <input type="submit" value="로그인" />
         <div class="find">
           <a href="#" class="forgot">아이디 찾기</a>
           <a href="#" class="forgot">비밀번호 찾기</a>
         </div>
         <!-- 로그인 에러 메시지 -->
-        <div th:if="${loginError}" class="error">
-          <p th:text="${loginError}"></p>
-        </div>
+        <c:if test="${not empty loginError}">
+          <div class="error">
+            <p><c:out value="${loginError}"/></p>
+          </div>
+        </c:if>
       </form>
     </div>
     <!-- 회원가입 폼 -->
     <div class="form signupform">
-      <form th:action="@{/register}" method="post" th:object="${registerForm}">
+      <form action="${pageContext.request.contextPath}/register" method="post">
         <h3>회원가입</h3>
-        <input type="text" th:field="*{name}" placeholder="이름을 입력해 주세요" />
-        <input type="text" th:field="*{phone}" placeholder="전화번호를 입력해 주세요" />
-        <input type="text" th:field="*{username}" placeholder="아이디를 입력해 주세요" />
-        <input type="email" th:field="*{email}" placeholder="이메일 주소를 입력해 주세요" />
-        <input type="password" th:field="*{password}" placeholder="비밀번호를 입력해 주세요" />
-        <input type="password" th:field="*{confirmPassword}" placeholder="비밀번호를 재입력해 주세요" />
+        <input type="text" name="name" placeholder="이름을 입력해 주세요" />
+        <input type="text" name="phone" placeholder="전화번호를 입력해 주세요" />
+        <input type="text" name="username" placeholder="아이디를 입력해 주세요" />
+        <input type="email" name="email" placeholder="이메일 주소를 입력해 주세요" />
+        <input type="password" name="password" placeholder="비밀번호를 입력해 주세요" />
+        <input type="password" name="confirmPassword" placeholder="비밀번호를 재입력해 주세요" />
         <input type="submit" value="회원가입" />
         <!-- 회원가입 에러 메시지 -->
-        <div th:if="${registerError}" class="error">
-          <p th:text="${registerError}"></p>
-        </div>
+        <c:if test="${not empty registerError}">
+          <div class="error">
+            <p><c:out value="${registerError}"/></p>
+          </div>
+        </c:if>
       </form>
     </div>
   </div>
 </div>
-<script th:inline="javascript">
-  /*<![CDATA[*/
+<script>
   const signinBtn = document.querySelector(".signinBtn");
   const signupBtn = document.querySelector(".signupBtn");
   const body = document.querySelector("body");
@@ -65,7 +68,6 @@
   signinBtn.onclick = function () {
     body.classList.remove("slide");
   };
-  /*]]>*/
 </script>
 </body>
 </html>
