@@ -15,7 +15,7 @@
   <div class="formBx">
     <!-- 로그인 폼 -->
     <div class="form signinform">
-      <form action="${pageContext.request.contextPath}/login" method="post">
+      <form action="${pageContext.request.contextPath}/loginProcess.jsp" method="post">
         <h3>로그인</h3>
         <input type="text" name="username" placeholder="아이디를 입력해 주세요" required />
         <input type="password" name="password" placeholder="비밀번호를 입력해 주세요" required />
@@ -24,16 +24,21 @@
           <a href="#" class="forgot">아이디 찾기</a>
           <a href="#" class="forgot">비밀번호 찾기</a>
         </div>
-        <!-- 로그인 에러 메시지
-        <c:if test="${not empty loginError}">
-          <div class="error">
-            <p><c:out value="${loginError}"/></p>
+
+        <!-- 로그인 에러 메시지 -->
+        <%
+            String error = request.getParameter("error");
+            if ("1".equals(error)) {
+        %>
+          <div class="error" style="color: red; margin-top: 10px;">
+            <p>로그인에 실패했습니다. 아이디와 비밀번호를 확인해 주세요.</p>
           </div>
-        </c:if> -->
+        <% } %>
       </form>
     </div>
   </div>
 </div>
+
 <script>
   const signinBtn = document.querySelector(".signinBtn");
   const body = document.querySelector("body");
