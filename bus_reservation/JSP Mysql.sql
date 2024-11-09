@@ -12,6 +12,7 @@ CREATE TABLE users (
 );
 
 INSERT INTO users (name, phone, username, email, password) 
+VALUES ('배추', '010-9876-5432', 'baechu', 'baechu@example.com', '1234');
 VALUES ('홍길동', '010-1234-5678', 'honggildong', 'hong@example.com', 'hashed_password');
 
 COMMIT;
