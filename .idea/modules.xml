@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/JSP BUS.iml" filepath="$PROJECT_DIR$/.idea/JSP BUS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/bus_reservation.main.iml" filepath="$PROJECT_DIR$/.idea/modules/bus_reservation.main.iml" />
     </modules>
   </component>
 </project>
