@@ -1,0 +1,65 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: -apple-system, BlinkMacSystemFont, "Malgun Gothic", "맑은 고딕", helvetica, "Apple SD Gothic Neo",
+      "Poppins", sans-serif;
+  }
+
+  /*좌석 배치 구성*/
+  .grid{
+    display: grid;
+    grid-template-columns: repeat(5, 50px);
+    justify-content: center;
+    align-items: center;
+    margin: 10px;
+    gap: 5px;
+    grid-row-gap: 10px;
+  }
+
+  /*좌석이미지, 선택가능한 좌석*/
+ .seat {
+  width: 50px; 
+  height: 50px;
+  background-color: rgb(255, 203, 203); 
+  text-align: center; /
+  line-height: 50px; 
+  border-radius: 5px; 
+  cursor: pointer; 
+  transition: background-color 0.3s ease; 
+ }
+
+/* 마우스 호버 시 색상변경 */
+.seat:hover {
+    background-color: #87ceeb;
+}
+
+ /*통로 빈칸*/
+ .path{
+  width: 50px;
+  height: 50px;
+  background-color: rgb(255, 255, 255);
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+ }
+
+ /*선택한 좌석*/
+ .selected{
+  background-color: lightblue;
+ }
+
+ .selected-seats {
+  margin-top: 20px; /* 위쪽 여백 */
+  padding: 10px; /* 안쪽 여백 */
+  border: 1px solid #ccc; /* 테두리 */
+  border-radius: 5px; /* 둥근 모서리 */
+  background-color: #f9f9f9; /* 배경색 */
+  text-align: center; /* 텍스트 중앙 정렬 */
+}
+
+ /*예매된 좌석*/
+ .payed{
+  background-color: gray;
+
+ }

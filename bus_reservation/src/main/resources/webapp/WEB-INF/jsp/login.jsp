@@ -16,10 +16,10 @@
   <div class="formBx">
     <!-- 로그인 폼 -->
     <div class="form signinform">
-      <form action="/login" method="post">
+      <form action="/login" method="get">
         <h3>로그인</h3>
         <input type="text" name="username" placeholder="아이디를 입력해 주세요" required />
-        <input type="password" name="password" placeholder="비밀번호를 입력해 주세요" required />
+        <input type="password" name="password2" placeholder="비밀번호를 입력해 주세요" required />
         <input type="submit" value="로그인" />
         <div class="find">
           <a href="#" class="forgot">아이디 찾기</a>

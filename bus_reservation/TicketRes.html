@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ticketing</title>
+</head>
+<body>
+    <h2>예매 결과</h2>
+    <div id="ticketInfo">
+        <!-- 예매 정보가 여기에 표시됩니다 -->
+    </div>
+    <button id="goToQuery">조회/취소로 이동</button>
+
+    <script>
+        const ticketInfo = document.getElementById("ticketInfo");
+        const goToQueryButton = document.getElementById("goToQuery");
+
+        // Retrieve booking data from localStorage
+        const bookingData = JSON.parse(localStorage.getItem("bookingData"));
+
+        if (bookingData) {
+            ticketInfo.innerHTML = `
+                <p>출발지: ${bookingData.departure}</p>
+                <p>노선: ${bookingData.route}</p>
+                <p>좌석 번호: ${bookingData.seat}</p>
+                <p>금액: ${bookingData.price}</p>
+            `;
+        } else {
+            ticketInfo.textContent = "예매된 정보가 없습니다.";
+        }
+
+        goToQueryButton.addEventListener("click", () => {
+            window.location.href = "QueryCancel.html";
+        });
+    </script>
+</body>
+</html>

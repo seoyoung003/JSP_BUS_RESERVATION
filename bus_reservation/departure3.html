@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>백석대학교 통학버스 예매시스템</title>
+    <link rel="stylesheet" href="main.css" />
+    <script src="language.js"></script>
+    <style>
+        .choicedepa {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        .depa {
+            background-color: #000080; /* 버튼 배경색 설정 */
+            color: white; /* 텍스트 색상 */
+            border: none; /* 버튼 테두리 제거 */
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+        }
+        .depa:hover {
+            background-color: #5a5aff; /* 호버 시 밝은 색으로 변경 */
+        }
+        .selected-depa, .price {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #333;
+        }
+        .hidden {
+            display: none;
+        }
+        .sub-options {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .sub-options button {
+            margin-right: 10px;
+            margin-bottom: 10px;
+            padding: 8px 15px;
+            background-color: #005cbf;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .sub-options button:hover {
+            background-color: #4080ff;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1><a href="Main.html">Icon 통학버스 예매시스템</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="departure.html" id="nav-booking">통학버스 예매</a></li>
+                <li><a href="QueryCancel.html" id="nav-query">조회/변경/취소</a></li>
+                <li><a href="Timetable.html" id="nav-timetable">운행정보</a></li>
+                <li><a href="Mypage.html" id="nav-mypage">마이페이지</a></li>
+                <select id="language-selector" onchange="changeLanguage()">
+                    <option value="ko">한국어</option>
+                    <option value="en">English</option>
+                    <option value="zh">中文</option>
+                    <option value="ja">日本語</option>
+                </select>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>출발지를 선택해주세요.</h2>
+    <br><br>
+
+    <div align="left" class="choicedepa">
+        <button class="depa" data-price="5,200원" data-has-options="true" data-options='["영등포 로터리상가 5번출구 신한은행 앞","영등포역","신길역"]'>영등포</button>
+
+        <button class="depa" data-price="5,200원" data-has-options="true" data-options='["교대역 8번", "14번 출구", "세연타워 앞"]'>교대</button>
+
+        <button class="depa" data-price="5,200원" data-has-options="true" data-options='["잠실역 4번	출구, 롯데마트 시계탑앞 소화전"]'>잠실</button>
+
+        <button class="depa" data-price="5,200원" data-has-options="true" data-options='["야탑역 4번 	출구, MG 새마을금고 앞 택시승강장"]'>성남(분당)</button>
+
+        <button class="depa" data-price="6,000원" data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["송내역 1번 	출구. 바닥 14번 표시자리"]'>부천(송내)</button>
+
+	<button class="depa" data-price="5,500원  data-has-options="true" data-options='["중앙역 1번	출구. 택시승차장", "상록수역 1번 출구. 롯데리아 앞"]'>안산</button>
+
+	<button class="depa" data-price="4,900원  data-has-options="true" data-options='["안양역 앞 1번가 공영주차장 앞", "범계역 4번 출구. 택시승강장"]'>안양</button>
+
+	<button class="depa" data-price="4,900원  data-has-options="true" data-options='["법원사거리"]'>수원(영통)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	<button class="depa" data-price="6,000원  data-has-options="true" data-options='["문학 경기장	역 1번 출구"]'>인천(문학)</button>
+
+	
+    </div>
+
+    <div class="selected-depa">
+        선택된 지역: <span id="selected-depa">없음</span>
+    </div>
+    <div class="price">
+        금액: <span id="selected-price">-</span>
+    </div>
+    
+    <!-- 하위 옵션 -->
+    <div id="sub-options" class="sub-options hidden">
+        <p>세부 옵션을 선택하세요:</p>
+        <div id="option-buttons"></div>
+    </div>
+    
+    <!-- "다음" 버튼 -->
+    <button id="next-button" class="next-button" disabled>다음</button>
+
+    <script>
+        const depaButtons = document.querySelectorAll(".depa");
+        const selectedDepa = document.getElementById("selected-depa");
+        const selectedPrice = document.getElementById("selected-price");
+        const nextButton = document.getElementById("next-button");
+        const subOptionsDiv = document.getElementById("sub-options");
+        const optionButtonsDiv = document.getElementById("option-buttons");
+
+        nextButton.disabled = true; // 초기에는 "다음" 버튼 비활성화
+
+        depaButtons.forEach(button => {
+            button.addEventListener("click", () => {
+                selectedDepa.textContent = button.textContent;
+                selectedPrice.textContent = button.getAttribute("data-price");
+
+                // 세부 옵션 처리
+                const hasOptions = button.getAttribute("data-has-options");
+                if (hasOptions === "true") {
+                    const options = JSON.parse(button.getAttribute("data-options"));
+                    optionButtonsDiv.innerHTML = ""; // 기존 옵션 제거
+                    options.forEach(option => {
+                        const optButton = document.createElement("button");
+                        optButton.textContent = option;
+                        optButton.addEventListener("click", () => {
+                            selectedDepa.textContent += ` (${option})`;
+                            subOptionsDiv.classList.add("hidden");
+                            nextButton.disabled = false; // 세부 옵션 선택 후 "다음" 버튼 활성화
+                        });
+                        optionButtonsDiv.appendChild(optButton);
+                    });
+                    subOptionsDiv.classList.remove("hidden"); // 하위 옵션 표시
+                } else {
+                    subOptionsDiv.classList.add("hidden");
+                    nextButton.disabled = false; // 옵션 없는 경우 바로 "다음" 버튼 활성화
+                }
+            });
+        });
+
+        // "다음" 버튼 클릭 이벤트
+        nextButton.addEventListener("click", () => {
+            const selectedData = {
+                depa: selectedDepa.textContent,
+                price: selectedPrice.textContent
+            };
+            localStorage.setItem("selectedData", JSON.stringify(selectedData)); // 선택 데이터 저장
+
+            // Ticketing.html로 이동
+            window.location.href = "Ticketing.html";
+        });
+    </script>
+</body>
+</html>

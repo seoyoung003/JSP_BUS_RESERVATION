@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>좌석 선택</title>
+    <link rel="stylesheet" href="main.css" />
+    <link rel="stylesheet" href="Ticketing.css" />
+</head>
+
+<body>
+    <header>
+        <div>
+            <h1><a href="Main.html">Icon 통학버스 예매시스템</a></h1>
+        </div>
+        <nav>	
+            <ul>
+            <li><a href="departure.html">통학버스 예매</a></li>
+            <li><a href="QueryCancel.html">조회/변경/취소</a></li>
+            <li><a href="Timetable.html">운행정보</a></li>
+            <li><a href="Mypage.html">마이페이지</a></li>
+            </ul>
+        </nav>
+    </header>
+    <h1>노선/시간/좌석예매</h1>
+    <div class="grid">
+        <div class="seat" data-seat-id="1">1</div>
+        <div class="seat" data-seat-id="2">2</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="3">3</div>
+        <div class="seat" data-seat-id="4">4</div>
+
+        <div class="seat" data-seat-id="5">5</div>
+        <div class="seat" data-seat-id="6">6</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="7">7</div>
+        <div class="seat" data-seat-id="8">8</div>
+
+        <div class="seat" data-seat-id="9">9</div>
+        <div class="seat" data-seat-id="10">10</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="11">11</div>
+        <div class="seat" data-seat-id="12">12</div>
+
+        <div class="seat" data-seat-id="13">13</div>
+        <div class="seat" data-seat-id="14">14</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="15">15</div>
+        <div class="seat" data-seat-id="16">16</div>
+
+        <div class="seat" data-seat-id="17">17</div>
+        <div class="seat" data-seat-id="18">18</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="19">19</div>
+        <div class="seat" data-seat-id="20">20</div>
+
+        <div class="seat" data-seat-id="21">21</div>
+        <div class="seat" data-seat-id="22">22</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="23">23</div>
+        <div class="seat" data-seat-id="24">24</div>
+
+        <div class="seat" data-seat-id="25">25</div>
+        <div class="seat" data-seat-id="26">26</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="27">27</div>
+        <div class="seat" data-seat-id="28">28</div>
+
+        <div class="seat" data-seat-id="29">29</div>
+        <div class="seat" data-seat-id="30">30</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="31">31</div>
+        <div class="seat" data-seat-id="32">32</div>
+
+        <div class="seat" data-seat-id="33">33</div>
+        <div class="seat" data-seat-id="34">34</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="35">35</div>
+        <div class="seat" data-seat-id="36">36</div>
+
+        <div class="seat" data-seat-id="37">37</div>
+        <div class="seat" data-seat-id="38">38</div>
+        <div class="path"> </div>
+        <div class="seat" data-seat-id="39">39</div>
+        <div class="seat" data-seat-id="40">40</div>
+
+        <div class="seat" data-seat-id="41">41</div>
+        <div class="seat" data-seat-id="42">42</div>
+        <div class="seat" data-seat-id="43">43</div>
+        <div class="seat" data-seat-id="44">44</div>
+        <div class="seat" data-seat-id="45">45</div>
+    </div>
+
+    <div class="selected-seats">
+        선택된 좌석: <span id="selected-seats-list">없음</span>
+	<button id="next-button" disabled>다음</button>
+    </div>
+
+    <script src="Ticketing_script.js"></script>
+</body>
+</html>

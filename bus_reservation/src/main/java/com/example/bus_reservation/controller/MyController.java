@@ -19,7 +19,7 @@ public class MyController {
     }
 
     @PostMapping("/login")
-    public String loginProcess(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    public String loginProcess(@RequestParam String username, @RequestParam String password2, HttpSession session, Model model) {
         String dbURL = "jdbc:mysql://localhost:3306/bus_reservation";
         String dbUser = "root";
         String dbPassword = "kim123456";
@@ -30,8 +30,7 @@ public class MyController {
         try {
             // 입력된 username과 password를 로그로 확인
             System.out.println("입력된 username: " + username);
-            System.out.println("입력된 password: " + password);
-
+            System.out.println("입력된 password: " + password2);
             // 데이터베이스 연결
             Class.forName("com.mysql.cj.jdbc.Driver");
             conn = DriverManager.getConnection(dbURL, dbUser, dbPassword);
@@ -54,7 +53,7 @@ public class MyController {
                 }
 
                 // DB에서 가져온 비밀번호와 입력된 비밀번호 비교
-                if (password.equals(storedPassword)) {
+                if (password2.equals(storedPassword)) {
                     // 로그인 성공
                     session.setAttribute("user_id", rs.getInt("user_id"));
                     session.setAttribute("username", username);
@@ -67,6 +66,7 @@ public class MyController {
                 model.addAttribute("error", "아이디가 존재하지 않습니다.");
                 return "login"; // 아이디가 존재하지 않음
             }
+
         } catch (SQLException e) {
             // SQL 예외 처리
             e.printStackTrace();
@@ -94,5 +94,6 @@ public class MyController {
                 if (conn != null) conn.close();
             } catch (SQLException ignore) {}
         }
+
     }
 }

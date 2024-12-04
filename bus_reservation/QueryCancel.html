@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>백석대학교 통학버스 예매시스템</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+        .choicedepa {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+	    justify-content: flex-start;
+        }
+    </style>
+</head>
+<body>
+<header>
+        <div>
+            <h1><a href="Main.html">Icon 통학버스 예매시스템</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="departure.html">통학버스 예매</a></li>
+                <li><a href="QueryCancel.html">조회/변경/취소</a></li>
+                <li><a href="Timetable.html">운행정보</a></li>
+                <li><a href="Mypage.html">마이페이지</a></li>
+            </ul>
+        </nav>
+</header>
+    <h2>예매 정보 조회/변경/취소</h2>
+    <div id="ticketInfo">
+        <!-- 예매 정보가 여기에 표시됩니다 -->
+    </div>
+    <button id="queryButton">예매 조회</button>
+    <button id="cancelButton">예매 취소</button>
+    <button id="editButton">예매 변경</button>
+
+    <script>
+        const ticketInfo = document.getElementById("ticketInfo");
+        const cancelButton = document.getElementById("cancelButton");
+
+        // Retrieve booking data from localStorage
+        const bookingData = JSON.parse(localStorage.getItem("bookingData"));
+
+        if (bookingData) {
+            ticketInfo.innerHTML = `
+                <p>출발지: ${bookingData.departure}</p>
+                <p>노선: ${bookingData.route}</p>
+                <p>좌석 번호: ${bookingData.seat}</p>
+                <p>금액: ${bookingData.price}</p>
+            `;
+        } else {
+            ticketInfo.textContent = "조회된 예매 정보가 없습니다.";
+            cancelButton.disabled = true;
+        }
+
+        cancelButton.addEventListener("click", () => {
+            localStorage.removeItem("bookingData"); // Delete booking data
+            alert("예매가 취소되었습니다.");
+            location.reload(); // Refresh the page to update UI
+        });
+    </script>
+</body>
+</html>

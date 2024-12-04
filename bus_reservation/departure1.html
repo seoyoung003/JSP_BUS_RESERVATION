@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>백석대학교 통학버스 예매시스템</title>
+    <link rel="stylesheet" href="main.css" />
+    <style>
+        .choicedepa {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+        .depa {
+            background-color: #000080; /* 버튼 배경색 설정 */
+            color: white; /* 텍스트 색상 */
+            border: none; /* 버튼 테두리 제거 */
+            border-radius: 5px;
+            padding: 10px 20px;
+            cursor: pointer;
+            text-align: center;
+            font-size: 16px;
+        }
+        .depa:hover {
+            background-color: #5a5aff; /* 호버 시 밝은 색으로 변경 */
+        }
+        .selected-depa {
+            margin-top: 20px;
+            font-size: 18px;
+            color: #333;
+        }
+        .price {
+            margin-top: 10px;
+            font-size: 16px;
+            color: #555;
+        }
+        .options {
+            margin-top: 10px;
+        }
+        .next-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            background-color: #000080;
+            color: white;
+        }
+        .next-button:disabled {
+            background-color: #ccc;
+            cursor: not-allowed;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div>
+            <h1><a href="Main.html">Icon 통학버스 예매시스템</a></h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="departure.html">통학버스 예매</a></li>
+                <li><a href="QueryCancel.html">조회/변경/취소</a></li>
+                <li><a href="Timetable.html">운행정보</a></li>
+                <li><a href="">마이페이지</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <h2>출발지를 선택해주세요.</h2>
+    <br><br>
+
+    <div align=left class="choicedepa">
+        <button class="depa" data-price="5,200원">영등포</button>
+	<button class="depa" data-price="5,200원">교대</button>
+        <button class="depa" data-price="5,200원">잠실</button>
+        <button class="depa" data-price="5,200원">성남(분당)</button>
+        <button class="depa" data-price="6,000원">인천(문학)</button>
+        <button class="depa" data-price="6,000원">부천(송내)</button>
+        <button class="depa" data-price="5,500원">안산</button>
+        <button class="depa" data-price="4,900원">안양</button>
+        <button class="depa" data-price="4,900원">수원(영통)</button>
+        <button class="depa" data-price="4,900원">화성(동탄)</button>
+        <button class="depa" data-price="4,900원">용인</button>
+        <button class="depa" data-price="4,600원">수원역</button>
+        <button class="depa" data-price="4,600원">화성(병점)</button>
+        <button class="depa" data-price="4,600원">오산/평택</button>
+        <button class="depa" data-price="5,200원">죽전</button>
+        <button class="depa" data-price="2,000원">아산</button>
+    </div>
+
+    <div class="selected-depa">
+        선택된 지역: <span id="selected-depa">없음</span>
+    </div>
+    <div class="price">
+        금액: <span id="selected-price">-</span>
+    </div>
+
+    <div class="options">
+        승차 위치: 
+        <select id="option-select" disabled>
+            <option value="" selected>위치를 선택하세요</option>
+        </select>
+    </div>
+
+    <!-- "다음" 버튼 -->
+    <button id="next-button" class="next-button" disabled>다음</button>
+
+    <script>
+        const depaButtons = document.querySelectorAll(".depa");
+        const selectedDepa = document.getElementById("selected-depa");
+        const selectedPrice = document.getElementById("selected-price");
+        const optionSelect = document.getElementById("option-select");
+        const nextButton = document.getElementById("next-button");
+
+        let options = []; // 선택된 지역별 옵션 저장
+
+	 // 지역별 옵션 데이터
+    	const optionsByDepa = {
+        "영등포": ["영등포역 5번출구 IBK 기업은행 건물 앞"],
+        "교대": ["교대역 8번, 14번 출구, 세연타워앞"],
+        "잠실": ["잠실역 4번출구, 롯데마트 시계탑앞 소화전"],
+        "성남(분당)": ["야탑역 4번 출구,MG새마을금고앞 택시승강장"],
+        "인천(문학)": ["문학경기장역 1번출구"],
+        "부천(송내)": ["송내역 1번 출구. 바닥 14번 표시자리"],
+        "안산": ["중앙역 1번 출구. 택시승차장", "상록수역 1번 출구. 롯데리아 앞"],
+	"안양": ["안양역 앞 1번가 공영주차장 앞", "범계역 4번 출구. 택시승강장"],
+	"수원(영통)": ["법원사거리 쉐보레매장 앞.(이브자리)", "영통입구 고가 밑 버스정류장", "수원신갈TG 입구 BMW 매장 앞 버스정류장"],
+	"화성(동탄)": ["동탄이마트 앞 버스정류장"]
+	"용인": ["터미널사거리 컬리넌 호텔 건너편", "명지대사거리 삼성디지털프라자앞", "강남대 삼거리 굿모닝외과 건물 앞", "신갈시외버스정류소"],
+	"수원역": ["수원역 파출소 우측 50m 앞"],
+	"화성(병점)": ["병점 홈플러스 버스정류장"],
+	"오산/평택": ["오산역 온누리약국 앞","평택대 정문입구 건너편 앞"],
+	"죽전": ["경부고속도로(부산방향) 죽전 간이정류장"],
+        "아산": ["아산시외버스터미널(모종환승장)", "아산 LG전자 앞", "배방역 사거리. 천안13km 표지판 앞", "한들물빛중학교 건너편 앞"]
+    };
+
+        depaButtons.forEach(button => {
+            button.addEventListener("click", () => {
+		const depa = button.textContent;
+                // 지역 및 금액 업데이트
+                selectedDepa.textContent = button.textContent;
+                selectedPrice.textContent = button.getAttribute("data-price");
+
+                // 옵션 초기화
+                optionSelect.innerHTML = '<option value="" selected>옵션을 선택하세요</option>';
+                optionSelect.disabled = false;
+                nextButton.disabled = true;
+
+                // 지역에 따라 옵션 설정 (예: "영등포"에 빈칸으로 추가 가능)
+                const options = optionsByDepa[depa] || ["옵션 없음"]; // 옵션이 없는 경우 기본값
+                options.forEach(option => {
+                    const optionElement = document.createElement("option");
+                    optionElement.textContent = option;
+                    optionElement.value = option;
+                    optionSelect.appendChild(optionElement);
+                });
+            });
+        });
+
+        // 옵션 선택 시 "다음" 버튼 활성화
+        optionSelect.addEventListener("change", () => {
+            nextButton.disabled = optionSelect.value === "";
+        });
+
+        // "다음" 버튼 클릭 이벤트
+        nextButton.addEventListener("click", () => {
+            const selectedData = {
+                depa: selectedDepa.textContent,
+                price: selectedPrice.textContent,
+                option: optionSelect.value
+            };
+            localStorage.setItem("selectedData", JSON.stringify(selectedData)); // 선택 데이터 저장
+
+            // Ticketing.html로 이동
+            window.location.href = "Ticketing.html";
+        });
+    </script>
+</body>
+</html>
