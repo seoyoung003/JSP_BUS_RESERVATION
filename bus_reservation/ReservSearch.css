@@ -1,0 +1,28 @@
+header{
+    width: 100vw;
+    height: 100px;
+}
+
+#mainCon {
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+
+}
+
+#content{
+    width: 100vw;
+    height: 560px;
+    display: flex;
+    align-items: center; 
+    justify-content: center; 
+}
+
+.result{
+    width: 600px;
+    height: 450px;
+    border-width: 5px;
+    border-radius: 8px;
+    border-color: rgb(83, 123, 158);
+    border-style: solid;
+}

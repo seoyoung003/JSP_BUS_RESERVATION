@@ -5,10 +5,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="80710102-e6dc-4908-9459-009380a964f8" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.local.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/dataSources.local.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/controller/MyController.java" beforeDir="false" afterPath="$PROJECT_DIR$/bus_reservation/src/main/java/com/example/bus_reservation/controller/MyController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/bus_reservation/src/main/resources/webapp/WEB-INF/jsp/login.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/bus_reservation/src/main/resources/webapp/WEB-INF/jsp/login.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bus_reservation/QueryCancel.html" beforeDir="false" afterPath="$PROJECT_DIR$/bus_reservation/QueryCancel.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/bus_reservation/build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/bus_reservation/build.gradle" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -123,7 +122,8 @@
       <workItem from="1729145207969" duration="5655000" />
       <workItem from="1731494607282" duration="5276000" />
       <workItem from="1732169625067" duration="3189000" />
-      <workItem from="1733315914485" duration="3360000" />
+      <workItem from="1733315914485" duration="3958000" />
+      <workItem from="1733377362811" duration="5151000" />
     </task>
     <servers />
   </component>
